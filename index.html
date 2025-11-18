@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>:'s Learning Site
+    <title>:'s Learning Site</title>
     <style>
         * {
             margin: 0;
@@ -18,27 +18,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(63, 94, 251, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+            padding: 20px;
         }
 
         .stars {
@@ -48,6 +28,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 0;
         }
 
         .star {
@@ -67,15 +48,13 @@
         .container {
             position: relative;
             z-index: 1;
-            max-width: 800px;
-            width: 90%;
+            max-width: 900px;
+            width: 100%;
             padding: 40px;
-            background: rgba(15, 32, 58, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 32, 58, 0.9);
             border-radius: 20px;
             border: 1px solid rgba(79, 172, 254, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                        0 0 40px rgba(79, 172, 254, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
@@ -84,14 +63,13 @@
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             font-weight: 700;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(79, 172, 254, 0.5);
         }
 
         .subtitle {
@@ -105,12 +83,14 @@
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .url-input {
             flex: 1;
+            min-width: 200px;
             padding: 15px 20px;
-            background: rgba(26, 39, 68, 0.6);
+            background: rgba(26, 39, 68, 0.8);
             border: 2px solid rgba(79, 172, 254, 0.3);
             border-radius: 10px;
             color: #fff;
@@ -122,7 +102,6 @@
             outline: none;
             border-color: #4facfe;
             box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
-            background: rgba(26, 39, 68, 0.9);
         }
 
         .url-input::placeholder {
@@ -152,51 +131,15 @@
             transform: translateY(0);
         }
 
-        .iframe-container {
-            width: 100%;
-            height: 600px;
-            border: 2px solid rgba(79, 172, 254, 0.3);
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(10, 22, 40, 0.8);
-            display: none;
-        }
-
-        .iframe-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .proxy-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .info {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(79, 172, 254, 0.1);
-            border-left: 3px solid #4facfe;
-            border-radius: 5px;
-            color: #7da8d8;
-            font-size: 0.9em;
-        }
-
         .controls {
             display: none;
             gap: 10px;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .controls.active {
             display: flex;
-            animation: fadeIn 0.5s ease;
         }
 
         .control-btn {
@@ -214,6 +157,60 @@
             background: rgba(79, 172, 254, 0.3);
             border-color: #4facfe;
         }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 2px solid rgba(79, 172, 254, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(10, 22, 40, 0.8);
+            display: none;
+        }
+
+        .iframe-container.active {
+            display: block;
+        }
+
+        .proxy-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(79, 172, 254, 0.1);
+            border-left: 3px solid #4facfe;
+            border-radius: 5px;
+            color: #7da8d8;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .proxy-form {
+                flex-direction: column;
+            }
+            
+            .url-input {
+                width: 100%;
+            }
+            
+            .go-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -222,7 +219,7 @@
     <div class="container">
         <div class="logo">
             <h1>:'S LEARNING SITE</h1>
-            <div class="subtitle">Web Proxy</div>
+            <div class="subtitle">Stuff</div>
         </div>
 
         <form class="proxy-form" id="proxyForm">
@@ -230,25 +227,25 @@
                 type="text" 
                 class="url-input" 
                 id="urlInput" 
-                placeholder="Enter URL (e.g., https://example.com)"
+                placeholder="Enter URL (e.g., example.com)"
                 required
             >
             <button type="submit" class="go-btn">Launch</button>
         </form>
 
         <div class="controls" id="controls">
-            <button class="control-btn" onclick="goBack()">← Back</button>
-            <button class="control-btn" onclick="goForward()">Forward →</button>
-            <button class="control-btn" onclick="reloadFrame()">⟳ Reload</button>
-            <button class="control-btn" onclick="closeFrame()">✕ Close</button>
+            <button type="button" class="control-btn" id="backBtn">← Back</button>
+            <button type="button" class="control-btn" id="forwardBtn">Forward →</button>
+            <button type="button" class="control-btn" id="reloadBtn">⟳ Reload</button>
+            <button type="button" class="control-btn" id="closeBtn">✕ Close</button>
         </div>
 
         <div class="iframe-container" id="iframeContainer">
-            <iframe class="proxy-frame" id="proxyFrame"></iframe>
+            <iframe class="proxy-frame" id="proxyFrame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
         </div>
 
         <div class="info">
-            <strong>⚠️ Note:</strong> This proxy uses iframe embedding. Some websites may block embedding due to security policies (X-Frame-Options). For full proxy functionality on GitHub, consider using a backend service.
+            <strong>⚠️ Note:</strong> This proxy uses iframe embedding. Some websites may block embedding due to security policies (X-Frame-Options). For educational purposes only.
         </div>
     </div>
 
@@ -264,15 +261,24 @@
             starsContainer.appendChild(star);
         }
 
+        // Get elements
         const proxyForm = document.getElementById('proxyForm');
         const urlInput = document.getElementById('urlInput');
         const proxyFrame = document.getElementById('proxyFrame');
         const iframeContainer = document.getElementById('iframeContainer');
         const controls = document.getElementById('controls');
+        
+        const backBtn = document.getElementById('backBtn');
+        const forwardBtn = document.getElementById('forwardBtn');
+        const reloadBtn = document.getElementById('reloadBtn');
+        const closeBtn = document.getElementById('closeBtn');
 
-        proxyForm.addEventListener('submit', (e) => {
+        // Form submit handler
+        proxyForm.addEventListener('submit', function(e) {
             e.preventDefault();
             let url = urlInput.value.trim();
+            
+            if (!url) return;
             
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
                 url = 'https://' + url;
@@ -283,32 +289,33 @@
             controls.classList.add('active');
         });
 
-        function goBack() {
+        // Control buttons
+        backBtn.addEventListener('click', function() {
             try {
                 proxyFrame.contentWindow.history.back();
             } catch (e) {
-                alert('Navigation blocked by the website security policy.');
+                alert('Navigation blocked by website security policy.');
             }
-        }
+        });
 
-        function goForward() {
+        forwardBtn.addEventListener('click', function() {
             try {
                 proxyFrame.contentWindow.history.forward();
             } catch (e) {
-                alert('Navigation blocked by the website security policy.');
+                alert('Navigation blocked by website security policy.');
             }
-        }
+        });
 
-        function reloadFrame() {
+        reloadBtn.addEventListener('click', function() {
             proxyFrame.src = proxyFrame.src;
-        }
+        });
 
-        function closeFrame() {
+        closeBtn.addEventListener('click', function() {
             iframeContainer.classList.remove('active');
             controls.classList.remove('active');
             proxyFrame.src = '';
             urlInput.value = '';
-        }
+        });
     </script>
 </body>
 </html>
